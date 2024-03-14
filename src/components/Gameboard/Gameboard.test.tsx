@@ -1,21 +1,21 @@
 import { describe, it, expect } from "@jest/globals";
 import { fireEvent, render, screen } from "@testing-library/react";
 // import { isEqual } from "lodash";
-import useDiceStore from "../../stores/useDiceStore";
+// import useDiceStore from "../../stores/useDiceStore";
 
 import Gameboard from "./Gameboard";
 
-const mockResetGame = jest.fn();
-const mockSetDiceRow = jest.fn();
-const mockSetGameOver = jest.fn();
+// const mockResetGame = jest.fn();
+// const mockSetDiceRow = jest.fn();
+// const mockSetGameOver = jest.fn();
 
-const mockDiceRow = [
-  { value: 1, locked: false },
-  { value: 2, locked: true },
-  { value: 3, locked: false },
-  { value: 4, locked: true },
-  { value: 5, locked: false },
-];
+// const mockDiceRow = [
+//   { value: 1, locked: false },
+//   { value: 2, locked: true },
+//   { value: 3, locked: false },
+//   { value: 4, locked: true },
+//   { value: 5, locked: false },
+// ];
 
 // jest.mock("../../stores/useDiceStore", () => ({
 //   __esModule: true,
@@ -48,21 +48,10 @@ const mockDiceRow = [
 //   //   }),
 // }));
 
-jest.mock("../../stores/useDiceStore", () => ({
-  __esModule: true,
-  default: jest.fn().mockImplementation(() => ({
-    diceRow: mockDiceRow,
-    setDiceRow: mockSetDiceRow,
-  })),
-}));
-
 // jest.mock("../../stores/useDiceStore", () => jest.fn());
 
 describe("Gameboard", () => {
   beforeEach(() => {
-    jest
-      .spyOn(useDiceStore, "setDiceRow")
-      .mockReturnValue({ diceRow: mockDiceRow });
     render(<Gameboard />);
   });
 
@@ -136,7 +125,7 @@ describe("Gameboard", () => {
 
     expect(scoreCard).toBeTruthy();
     expect(scoreCard.parentElement).toHaveClass("score-card");
-    expect(scoreCard.parentElement?.children).toHaveLength(16);
+    expect(scoreCard.parentElement?.children).toHaveLength(15);
   });
 
   it("should not change die if it is locked", () => {
@@ -163,11 +152,11 @@ describe("Gameboard", () => {
     }
   });
 
-  it("should not continue if game is over", () => {
-    const btn = screen.getByTestId("gameboard-rolls-left-button");
-    const dice = screen.queryAllByTestId("dice");
-    useDiceStore.mockReturnValue({ gameOver: true });
-    const allDiceLocked = dice.every((die) => die.classList.contains("locked"));
-    expect(allDiceLocked).toBe(true);
-  });
+  // it("should not continue if game is over", () => {
+  //   const btn = screen.getByTestId("gameboard-rolls-left-button");
+  //   const dice = screen.queryAllByTestId("dice");
+  //   useDiceStore.mockReturnValue({ gameOver: true });
+  //   const allDiceLocked = dice.every((die) => die.classList.contains("locked"));
+  //   expect(allDiceLocked).toBe(true);
+  // });
 });

@@ -1,6 +1,5 @@
 import { describe, it, expect } from "@jest/globals";
-import { fireEvent, render, screen } from "@testing-library/react";
-// import { isEqual } from "lodash";
+import { render, screen } from "@testing-library/react";
 
 import ScoreCard from "./ScoreCard";
 

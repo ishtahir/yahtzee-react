@@ -5,7 +5,7 @@ import { isEqual } from "lodash";
 import DiceRow from "./DiceRow";
 
 describe("DiceRow", () => {
-  beforeEach(() => render(<DiceRow />));
+  beforeEach(() => render(<DiceRow rollsLeft={2} />));
 
   it("should render DiceRow", () => {
     expect(screen).toBeTruthy();

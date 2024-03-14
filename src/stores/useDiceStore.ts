@@ -17,6 +17,14 @@ export type TestID = {
   testID?: string;
 };
 
+export function diffNum(num: number = 0) {
+  let number = random(1, 6);
+  while (number === num) {
+    number = random(1, 6);
+  }
+  return number;
+}
+
 type DiceState = {
   diceRow: Die[];
   gameOver: boolean;

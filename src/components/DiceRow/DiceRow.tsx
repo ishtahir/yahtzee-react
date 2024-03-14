@@ -2,7 +2,11 @@ import useDiceStore, { TestID } from "../../stores/useDiceStore";
 
 import Dice from "../Dice/Dice";
 
-const DiceRow = ({ testID }: TestID) => {
+type DiceRowProps = {
+  rollsLeft: number;
+} & TestID;
+
+const DiceRow = ({ rollsLeft, testID }: DiceRowProps) => {
   const diceRow = useDiceStore((state) => state.diceRow);
   const gameOver = useDiceStore((state) => state.gameOver);
   const setDiceRow = useDiceStore((state) => state.setDiceRow);
@@ -20,7 +24,7 @@ const DiceRow = ({ testID }: TestID) => {
       {diceRow.map((die, ind) => (
         <Dice
           key={ind}
-          disabled={gameOver}
+          disabled={gameOver || rollsLeft === 0}
           id={ind}
           locked={die.locked}
           testID="dice"

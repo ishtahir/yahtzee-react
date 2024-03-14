@@ -1,13 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-import useDiceStore from "../../stores/useDiceStore";
+import useDiceStore, { diffNum } from "../../stores/useDiceStore";
 import useLeaderboardStore from "../../stores/useLeaderboardStore";
 
 import DiceRow from "../DiceRow/DiceRow";
 import ScoreCard from "../ScoreCard/ScoreCard";
 import Leaderboard from "../Leaderboard/Leaderboard";
-
-import { random } from "lodash";
 
 const Gameboard = () => {
   const diceRow = useDiceStore((state) => state.diceRow);
@@ -28,30 +26,31 @@ const Gameboard = () => {
   const totalRounds = 13;
 
   const rollActiveDice = () => {
-    const dice = diceRow.map((die) => {
-      if (!die.locked) die.value = random(1, 6);
+    const updatedDice = diceRow.map((die) => {
+      if (!die.locked) die.value = diffNum(die.value);
       return die;
     });
 
-    setDiceRow(dice);
+    setDiceRow(updatedDice);
   };
 
   const resetDice = () => {
-    const newDice = diceRow.map((die) => {
-      die.value = random(1, 6);
+    const updatedDice = diceRow.map((die) => {
+      die.value = diffNum();
       die.locked = false;
       return die;
     });
 
-    setDiceRow(newDice);
+    setDiceRow(updatedDice);
   };
 
   const lockAllDice = () => {
-    const dice = diceRow.map((die) => {
-      die.locked = true;
+    const updatedDice = diceRow.map((die) => {
+      if (!die.locked) die.locked = true;
       return die;
     });
-    setDiceRow(dice);
+
+    setDiceRow(updatedDice);
   };
 
   const handleTakeTurn = (reset: boolean = false) => {
@@ -102,9 +101,13 @@ const Gameboard = () => {
     }
   }, [gameOver]);
 
+  useEffect(() => {
+    if (rollsLeft === 0) lockAllDice();
+  }, [rollsLeft]);
+
   return (
     <div className="gameboard">
-      <DiceRow />
+      <DiceRow rollsLeft={rollsLeft} testID="dice-row" />
       {gameOver ? (
         <button
           className="roll-btn"

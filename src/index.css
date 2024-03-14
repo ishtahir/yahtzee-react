@@ -1,0 +1,335 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Tera&family=Playpen+Sans:wght@700&display=swap");
+
+:root {
+  --size: 60px;
+  --margin: 50px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100vh;
+}
+
+body {
+  background-color: #222;
+  color: #f5f5f5;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: "Lexend Tera", sans-serif;
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 100px;
+}
+
+.dice {
+  height: var(--size);
+  width: var(--size);
+  color: #000;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  font-family: "Playpen Sans", cursive;
+  font-weight: 700;
+  margin: 5px 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.dice:hover {
+  transform: scale(1.2);
+}
+
+.dice.locked:hover {
+  transform: scale(1);
+}
+
+.dice-row {
+  display: flex;
+  justify-content: center;
+  box-shadow: -5px -5px 15px 5px rgb(50, 167, 251),
+    5px 5px 15px 5px rgb(255, 202, 86);
+  padding: 10px;
+  border-radius: 20px;
+  margin-bottom: var(--margin);
+}
+
+.gameboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 729px;
+}
+
+.roll-btn {
+  width: 300px;
+  align-self: center;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 92, 141, 1) 16.7%,
+    rgba(255, 147, 79, 1) 33.4%,
+    rgba(255, 191, 50, 1) 50.1%,
+    rgba(22, 219, 147, 1) 66.8%,
+    rgba(55, 114, 251, 1) 83.5%
+  );
+  color: #000;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px #ff7474a1;
+  transition: all 0.2s;
+}
+
+.roll-btn:hover {
+  transform: translateY(-3px);
+}
+
+.roll-btn:active {
+  box-shadow: 2px 2px 2px #ff7474a1;
+  transform: translateY(0);
+}
+
+.roll-btn:disabled {
+  box-shadow: none;
+  background: #555;
+  color: #999;
+  transform: translateY(0);
+}
+
+.roll-btn:disabled:hover {
+  cursor: not-allowed;
+}
+
+.roll-btn:disabled:active {
+  background-color: #555;
+  transform: translateY(0);
+}
+
+.locked {
+  background-color: #555;
+  color: #999;
+  box-shadow: 5px 5px 5px #aaaaaa5d;
+}
+
+.one {
+  background-color: #fff536;
+  box-shadow: 5px 5px 5px #fff5365d;
+}
+
+.two {
+  background-color: #4add6a;
+  box-shadow: 5px 5px 5px #4add6a5d;
+}
+
+.three {
+  background-color: #08e5d8;
+  box-shadow: 5px 5px 5px #08e5d85d;
+}
+
+.four {
+  background-color: #5885ff;
+  box-shadow: 5px 5px 5px #5885ff5d;
+}
+
+.five {
+  background-color: #fe69cc;
+  box-shadow: 5px 5px 5px #fe69cc5d;
+}
+
+.six {
+  background-color: #ff4646;
+  box-shadow: 5px 5px 5px #ff46465d;
+}
+
+h2 {
+  text-align: center;
+}
+
+.score-card,
+.leaderboard {
+  margin: var(--margin) 0;
+  border: 1px solid white;
+  width: 95%;
+  font-family: "Playpen Sans", cursive;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.score-card .rules,
+.leaderboard .rules {
+  color: whitesmoke;
+  background-color: #242e38;
+  list-style: none;
+  margin: 0;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.score-card .rules:not(:last-child),
+.leaderboard .rules:not(:last-child) {
+  border-bottom: 1px solid white;
+}
+
+.score-card .rules:nth-child(even),
+.leaderboard .rules:nth-child(even) {
+  background-color: #2c3844;
+}
+
+.score-card li,
+.leaderboard li {
+  padding: 10px 0;
+}
+
+.score-rule {
+  color: rgb(255, 152, 152);
+  text-decoration: line-through;
+  font-style: italic;
+  counter-reset: section;
+}
+
+.score-points {
+  font-size: 20px;
+}
+
+.score-card > .rules:last-child {
+  font-size: 25px;
+  color: rgb(152, 255, 162);
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+}
+
+.leaderboard {
+  counter-reset: section;
+}
+
+.leaderboard > .rules li:first-child::before {
+  counter-increment: section;
+  content: counter(section);
+  margin-right: 20px;
+  background-color: #fff;
+  color: #333;
+  padding: 0 5px;
+  width: 20px;
+  text-align: center;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+/* Animation */
+.jello-horizontal {
+  -webkit-animation: jello-horizontal 0.9s both;
+  animation: jello-horizontal 0.9s both;
+}
+@-webkit-keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+/* bigger than a phone styles */
+@media (min-width: 600px) {
+  :root {
+    --size: 80px;
+  }
+
+  .dice {
+    font-size: 50px;
+    margin: 10px;
+  }
+
+  .dice-row {
+    box-shadow: -5px -5px 30px 5px rgb(50, 167, 251),
+      5px 5px 30px 5px rgb(255, 202, 86);
+    padding: 15px;
+  }
+
+  .gameboard {
+    height: auto;
+  }
+
+  .score-card menu {
+    padding: 10px 40px;
+    user-select: none;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+  }
+}

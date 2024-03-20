@@ -23,7 +23,7 @@ body {
   font-family: "Lexend Tera", sans-serif;
   text-align: center;
   font-size: 50px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .dice {
@@ -58,14 +58,15 @@ body {
     5px 5px 15px 5px rgb(255, 202, 86);
   padding: 10px;
   border-radius: 20px;
-  margin-bottom: var(--margin);
+  margin-bottom: 50px;
+  /* position: sticky;
+  top: 50px; */
 }
 
 .gameboard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 729px;
 }
 
 .roll-btn {
@@ -165,6 +166,7 @@ h2 {
   font-family: "Playpen Sans", cursive;
   display: flex;
   flex-direction: column;
+  max-height: 360px;
   overflow-y: scroll;
 }
 
@@ -215,7 +217,6 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 95%;
 }
 
 .leaderboard {
@@ -331,5 +332,10 @@ h2 {
     display: flex;
     justify-content: space-evenly;
     width: 50%;
+  }
+
+  .score-card,
+  .leaderboard {
+    max-height: 577px;
   }
 }
